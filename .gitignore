@@ -1,0 +1,12 @@
+**/.DS_Store
+**/__pycache__
+.vscode
+**/*mt.ipynb
+**/*mt
+
+notebook/.ipynb_checkpoints
+.env
+tableau
+data/dataset
+data/videos
+
