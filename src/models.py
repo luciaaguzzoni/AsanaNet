@@ -11,6 +11,7 @@ import pickle
 
 
 img_size = 100
+num_classes = 106
 
 # Initialising the ImageDataGenerator class.
 '''
@@ -54,7 +55,7 @@ def create_CNN():
         layers.Flatten(),
         #layers.Dense(512, activation='relu'), #prova anche 256 e 1024
         layers.Dropout(0.5),
-        layers.Dense(107, activation='softmax') 
+        layers.Dense(num_classes, activation='softmax') 
     ])
     
     return model
