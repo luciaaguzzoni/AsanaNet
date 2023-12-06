@@ -5,8 +5,9 @@
 **/*mt
 
 notebook/.ipynb_checkpoints
+notebook/find_model_0.ipynb
 .env
-tableau
 data/dataset
 data/videos
 videos
+

@@ -1,6 +1,4 @@
 import pandas as pd
-import os
-import time
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -31,6 +29,7 @@ def get_asanas_names(path):
     df["Name"] = df["Name"].apply(change_names)
     my_asanas = list(df["Name"])
     return my_asanas
+
 
 
 def clean_df(df):
@@ -73,8 +72,8 @@ def get_asana_info(asana_list,driver):
     soup = BeautifulSoup(html, "html.parser")
 
     asana_name = soup.find_all("div", {"class":"headline"})[0].getText().split("\n")[-2]
-    if asana_name in asana_list:
-        #print(f"{asana_name} si")
+    
+    if asana_name in asana_list: # get only my asanas, not all the asanas in the website
         d["asana_name"]=asana_name
         
         img_url = soup.find_all("div",{"class":"photo"})[0].find('img')["src"]
@@ -112,20 +111,17 @@ def get_all_asanas_info(names_path, save_path):
 
     asana_list = get_asanas_names(names_path)
     
-    url_list = get_all_url()
+    url_list = get_all_url() # urls to each position page
     all_poses = []
 
     for el in url_list:
-
         driver = webdriver.Chrome()
         driver.get(el)
 
-        d = get_asana_info(asana_list,driver)
+        d = get_asana_info(asana_list, driver)
         if d!={}:
             all_poses.append(d) 
 
     asanas_df = pd.DataFrame(all_poses)
-    asanas_df.sort_values(by='asana_name',inplace=True,ignore_index=True)
-
     asana_df = clean_df (asana_df)
     asanas_df.to_csv(save_path, index=False)

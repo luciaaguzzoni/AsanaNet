@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 # constants
-img_size = 100
+
 
 
 def resize_without_squeezing(image, target_size):
@@ -42,10 +42,6 @@ def resize_without_squeezing(image, target_size):
     return canvas
 
 
-
-
-
-
 def get_folders_in_directory(directory_path):
     '''
     returns a list with the names of the folders in 'directory_path'
@@ -56,10 +52,8 @@ def get_folders_in_directory(directory_path):
     folders = [item for item in items if os.path.isdir(os.path.join(directory_path, item))]
     return folders
 
-
-
     
-def load_images_from_folder(folder_dir):
+def load_images_from_folder(folder_dir, img_size):
     # Function to load and preprocess images from a folder
     # returns a list of all images in folder_dir, after resizing them to 
     images = []
@@ -73,7 +67,7 @@ def load_images_from_folder(folder_dir):
 
 
 
-def get_data(dir):
+def get_data(dir, img_size):
     """
     input: path that contains the folders of all yoga poses
     output: all images after preprocessing and corresponding labels, saved as numpy
@@ -81,13 +75,12 @@ def get_data(dir):
 
     labels_name = get_folders_in_directory(dir) # get the list of folder names
     labels_dict1 = {label:i for i,label in enumerate(labels_name)} # assign an int for each folder name = asana
-    labels_dict2 = {i:label for i,label in enumerate(labels_name)}
 
     # Get all images and labels
     all_images=[]
     all_labels=[]
     for label in labels_name:
-        new_images = load_images_from_folder(dir+'/'+label)
+        new_images = load_images_from_folder(dir+'/'+label, img_size)
         all_images = all_images + new_images
         for i in range(len(new_images)):
             all_labels.append(labels_dict1[label])
@@ -103,5 +96,5 @@ def get_data(dir):
     images_shuffled = images[indices]
     labels_shuffled = labels[indices]
 
-    return images_shuffled, labels_shuffled, labels_dict2
+    return images_shuffled, labels_shuffled, labels_name
 

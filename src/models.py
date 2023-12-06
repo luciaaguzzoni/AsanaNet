@@ -7,9 +7,6 @@ import pandas as pd
 
 import pickle 
 
-#import numpy as np
-#import random
-
 
 # Initialising the ImageDataGenerator class.
 '''
@@ -40,7 +37,7 @@ def create_CNN(num_classes):
     model = keras.Sequential([
         layers.Conv2D(16, (3, 3), padding='same', activation='relu'),
         layers.MaxPooling2D(2, 2),
-        layers.Dropout(0.2), #to avoid overfitting
+        layers.Dropout(0.2),
         
         layers.Conv2D(32, (3, 3), padding='same',  activation='relu'),
         layers.MaxPooling2D(2, 2),
@@ -87,7 +84,7 @@ def compile_model(model, optimizer, metrics):
 
 
 def export_model(model, model_type):
-    model_file = f'../models/param_iteration_{model_type}.pkl'
+    model_file = f'models/param_iteration_{model_type}.pkl'
     with open(model_file, 'wb') as f:
         pickle.dump(model, f)
 
@@ -162,11 +159,10 @@ def train_all(param_grid,train_data, train_labels, val_data, val_labels, test_da
 
 
 def save_training_results(new_results_list):
+    result_df = pd.DataFrame(new_results_list)
     try:
-        training_df = pd.read_csv('../data/training_table.cvs')
-        result_df = pd.DataFrame(new_results_list)
+        training_df = pd.read_csv('data/training_table.cvs')
         new_training_df = pd.concat([training_df, new_results_list]).reset_index(drop=True)
-        new_training_df.to_csv("../data/training_table.cvs", index=False)
+        new_training_df.to_csv("data/training_table.cvs", index=False)
     except:
-        result_df = pd.DataFrame(new_results_list)
-        result_df.to_csv("../data/training_table.cvs", index=False)
+        result_df.to_csv("data/training_table.cvs", index=False)
