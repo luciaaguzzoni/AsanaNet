@@ -6,8 +6,6 @@ import os
 img_size = 100
 
 
-
-
 def resize_without_squeezing(image, target_size):
     '''
     resize the input image without squeezing it 
@@ -82,7 +80,8 @@ def get_data(dir):
     """
 
     labels_name = get_folders_in_directory(dir) # get the list of folder names
-    labels_dict = {label:i for i,label in enumerate(labels_name)} # assign an int for each folder name = asana
+    labels_dict1 = {label:i for i,label in enumerate(labels_name)} # assign an int for each folder name = asana
+    labels_dict2 = {i:label for i,label in enumerate(labels_name)}
 
     # Get all images and labels
     all_images=[]
@@ -91,7 +90,7 @@ def get_data(dir):
         new_images = load_images_from_folder(dir+'/'+label)
         all_images = all_images + new_images
         for i in range(len(new_images)):
-            all_labels.append(labels_dict[label])
+            all_labels.append(labels_dict1[label])
 
     # Ensure that all_image_paths and all_labels are numpy arrays for easier manipulation
     images = np.array(all_images)/255 # normalize images to the range [0-1]
@@ -103,8 +102,6 @@ def get_data(dir):
     # Use the shuffled indices to reorder images and labels 
     images_shuffled = images[indices]
     labels_shuffled = labels[indices]
-    images = images_shuffled
-    labels = labels_shuffled
 
-    return images, labels
+    return images_shuffled, labels_shuffled, labels_dict2
 

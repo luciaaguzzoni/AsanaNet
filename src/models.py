@@ -3,15 +3,13 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.callbacks import EarlyStopping
+import pandas as pd
 
 import pickle 
 
 #import numpy as np
 #import random
 
-
-img_size = 100
-num_classes = 106
 
 # Initialising the ImageDataGenerator class.
 '''
@@ -36,9 +34,9 @@ datagen = ImageDataGenerator(
 
 
 
+# creation models functions
 
-
-def create_CNN():
+def create_CNN(num_classes):
     model = keras.Sequential([
         layers.Conv2D(16, (3, 3), padding='same', activation='relu'),
         layers.MaxPooling2D(2, 2),
@@ -62,7 +60,7 @@ def create_CNN():
 
 
 
-def create_DN():
+def create_DN(num_classes, img_size):
     ptrain_model = tf.keras.applications.DenseNet121(input_shape=(img_size,img_size,3),
                                                       include_top=False,
                                                       weights='imagenet',
@@ -75,10 +73,11 @@ def create_DN():
     x_layer = tf.keras.layers.Dense(512, activation='relu')(drop_layer)
     x_layer1 = tf.keras.layers.Dense(128, activation='relu')(x_layer)
     drop_layer1 = tf.keras.layers.Dropout(0.20)(x_layer1)
-    outputs = tf.keras.layers.Dense(107, activation='softmax')(drop_layer1)
+    outputs = tf.keras.layers.Dense(num_classes, activation='softmax')(drop_layer1)
     model = tf.keras.Model(inputs=inputs, outputs=outputs)
                   
     return model 
+
 
 
 
@@ -87,26 +86,31 @@ def compile_model(model, optimizer, metrics):
     return model
 
 
-
-
-def save_model(model):
-    model_file = '../models/param_iteration.pkl'
+def export_model(model, model_type):
+    model_file = f'../models/param_iteration_{model_type}.pkl'
     with open(model_file, 'wb') as f:
         pickle.dump(model, f)
 
 
+def import_model(path):
+    with open(path, 'rb') as f:
+        model = pickle.load(f)
+    return model
 
-def train_model(train_data, val_data, test_data, train_labels_one_hot, val_labels_one_hot, test_labels_one_hot, model_type, optimizer, batch_size, num_epochs, metrics=['accuracy']):
+
+
+def train_model(train_data, val_data, test_data, train_labels_one_hot, val_labels_one_hot, test_labels_one_hot, model_type, optimizer, batch_size, num_epochs, num_classes, img_size, metrics=['accuracy']):
 
     result_dict = {}
+    result_dict["model"] = model_type
     result_dict["optimizer"] = optimizer
     result_dict["num_epochs"] = num_epochs
     result_dict["batch_size"] = batch_size
    
     if model_type == 'CNN':
-        model = create_CNN()
+        model = create_CNN(num_classes)
     elif model_type == 'DenseNet':
-        model = create_DN()
+        model = create_DN(num_classes,img_size)
         
     # optimizer
     initial_learning_rate = 0.001
@@ -138,26 +142,31 @@ def train_model(train_data, val_data, test_data, train_labels_one_hot, val_label
     return result_dict, model
 
 
-param_grid = {
-    'epochs' : [30,50,80],
-    'batch_size': [8,16,32],
-    'optimizer': ['adam','rmsprop','SGD']
-}
-
-
-def find_best_par(train_data, val_data, test_data, train_labels_one_hot, val_labels_one_hot, test_labels_one_hot):
+def train_all(param_grid,train_data, train_labels, val_data, val_labels, test_data, test_labels, num_classes, img_size):
     results = []
     i=0
     best_accuracy = (-1,0)
 
-    for n_ep in param_grid['epochs']:
-        for b_size in param_grid["batch_size"]:
-            for opt in param_grid['optimizer']:
-                print(f"number of epochs: {n_ep}, batch size: {b_size}, optimizer: {opt}")
-                d, model = train_model(train_data, val_data, test_data, train_labels_one_hot, val_labels_one_hot, test_labels_one_hot, 
-                                'CNN', opt, b_size, n_ep, metrics=['accuracy'])
-                results.append(d)
-                if d["accuracy"] > best_accuracy[1]:
-                    best_accuracy = (i,d["accuracy"])
-                    save_model(model)
-                i+=1            
+    for model_type in param_grid['model']:
+        for n_ep in param_grid['epochs']:
+            for b_size in param_grid["batch_size"]:
+                for opt in param_grid['optimizer']:
+                    print(f"number of epochs: {n_ep}, batch size: {b_size}, optimizer: {opt}")
+                    d, model = train_model(train_data, val_data, test_data, train_labels, val_labels, test_labels, 
+                                    model_type, opt, b_size, n_ep, num_classes, img_size, metrics=['accuracy'])
+                    results.append(d)
+                    if d["accuracy"] > best_accuracy[1]:
+                        best_accuracy = (i,d["accuracy"])
+                        export_model(model,model_type)
+                    i+=1            
+
+
+def save_training_results(new_results_list):
+    try:
+        training_df = pd.read_csv('../data/training_table.cvs')
+        result_df = pd.DataFrame(new_results_list)
+        new_training_df = pd.concat([training_df, new_results_list]).reset_index(drop=True)
+        new_training_df.to_csv("../data/training_table.cvs", index=False)
+    except:
+        result_df = pd.DataFrame(new_results_list)
+        result_df.to_csv("../data/training_table.cvs", index=False)
