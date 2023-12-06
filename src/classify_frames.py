@@ -34,15 +34,14 @@ def get_positions_from_video(path, model, img_size, legend_labels):
                 
                     # Your image processing and classification code goes here
                     label = np.argmax(model.predict(img_np), axis=1)[0]
-                    probability = model.predict_proba(img_np)
-                    prob = round(max(probability[0]), 2)
                     guessed_position.append(legend_labels[label])
                     try:
                         new_pose = legend_labels[label]
                         if new_pose!=tmp:
                             tmp=new_pose  
                             plt.imshow(img)
-                            plt.savefig(f"{i} - {new_pose} - p{prob}")
+                            # plt.savefig(f"{i} - {new_pose} - p{prob}")
+                            plt.savefig(f"{i} - {new_pose}")
                             i+=1
                     except KeyError:
                         print(f"Key Error: {label[0]}")
