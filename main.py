@@ -14,7 +14,7 @@ base_dir = 'data/dataset'
 best_model_dir = 'models/final_model.pkl'
 asanas_names_dir = 'data/yoga_poses.csv'
 asanas_df_dir = 'data/asanas_df.csv'
-asanas_images_dir = 'images'
+asanas_images_dir = 'images/asanas'
 video_path = "videos/pati.mov"
 
 already_tuned = True

@@ -66,9 +66,11 @@ DenseNet, or Densely Connected Convolutional Networks, focuses on connecting eac
 Below are reported the accuracy results for each combination of batch sizes and optimizer used for CNN model and DenseNet model. <br>
 In the end only 30 numbers of epochs were used since the Early Stopping tecnique halted the process before the thirtieth iteration almost in every case.
 
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/CNN_accuracy.png" width="600" />
 
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/DenseNet_accuracy.png" width="600" />
 
-
+The final choice was using DenseNet model with 30 epochs, batch size of 16 and Adam optimizer.
 
 ## Functioning example
 
