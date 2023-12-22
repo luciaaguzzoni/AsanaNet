@@ -74,23 +74,15 @@ The final choice was using DenseNet model with 30 epochs, batch size of 16 and A
 
 ## Functioning example
 
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_ok.png" width="200" />
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_ok.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Adho%20Mukha%20Svanasana.png" width="100" />
 
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Adho%20Mukha%20Svanasana.png" width="100" />
-
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_wrong.png" width="200" />
-
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Camatkarasana.png" width="100" />
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_wrong.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Camatkarasana.png" width="100" />
 
 <br>
 
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_ok.png" width="200" />
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_ok.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Tadasana.png" width="50" />
 
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Tadasana.png" width="50" />
-
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_wrong.png" width="200" />
-
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Urdhva%20mukha%20svanasana.png" width="100" />
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_wrong.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Urdhva%20mukha%20svanasana.png" width="100" />
 
 
 ## Conclusions (Next Steps)
