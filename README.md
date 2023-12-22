@@ -66,16 +66,16 @@ DenseNet, or Densely Connected Convolutional Networks, focuses on connecting eac
 Below are reported the accuracy results for each combination of batch sizes and optimizer used for CNN model and DenseNet model. <br>
 In the end only 30 numbers of epochs were used since the Early Stopping tecnique halted the process before the thirtieth iteration almost in every case.
 
-<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/CNN_accuracy.png" width="450" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/DenseNet_accuracy.png" width="450" />
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/CNN_accuracy.png" width="400" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/DenseNet_accuracy.png" width="400" />
 
 The final choice was using DenseNet model with 30 epochs, batch size of 16 and Adam optimizer.
 
 ## Functioning example
 
-| <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_ok.png" width="200" /> | <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Adho%20Mukha%20Svanasana.png" width="200" /> |<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_wrong.png" width="200" /> | <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Camatkarasana.png" width="200" /> |
+ <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_ok.png" width="200" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Adho%20Mukha%20Svanasana.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_wrong.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Camatkarasana.png" width="200" /> 
 
 
-| <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_ok.png" width="200" /> | <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Tadasana.png" width="150" /> | <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_wrong.png" width="200" /> | <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Urdhva%20mukha%20svanasana.png" width="200" /> |
+<img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_ok.png" width="200" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Tadasana.png" width="100" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_wrong.png" width="200" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Urdhva%20mukha%20svanasana.png" width="200" />
 
 
 ## Conclusions (Next Steps)
