@@ -71,14 +71,14 @@ In the end only 30 numbers of epochs were used since the Early Stopping tecnique
 The final choice was using DenseNet model with 30 epochs, batch size of 16 and Adam optimizer.
 
 ## Functioning example
-I've tested the model with a short yoga sequence video and are reported below some results that I think highlights which could be the next possible steps to improve the model.
+I've tested the model with a short yoga sequence video and some results that I think highlights which could be the next possible steps to improve the model are reported below.
 
  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_ok.png" width="200" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Adho%20Mukha%20Svanasana.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/adhomukha_wrong.png" width="200" /> <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Camatkarasana.png" width="200" /> 
 <br>This example show how the model can get confused when it is not performed a specific position but the body is transitioning from a position to the next one.
 
 
 <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_ok.png" width="200" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Tadasana.png" width="100" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/tadasana_wrong.png" width="200" />  <img src="https://github.com/luciaaguzzoni/AsanaNet/blob/main/images/asanas/Urdhva%20mukha%20svanasana.png" width="200" />
-<nr>In this case the position *tadasana* was not guessed correctly in one occasion and this may have happened because the model focused on the shape of the cloud instead of the body.
+<br>In this case the position *tadasana* was not guessed correctly in one occasion and this may have happened because the model focused on the shape of the cloud instead of the body.
 
 ## Conclusions (Next Steps)
 First of all, the training data should be incremented in order to have at least one hundred images for each positions. It may also be useful to find a way to remove the background both in the training images and in the videos screenshot that the model is used on. <br>
